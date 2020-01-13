@@ -1,7 +1,7 @@
 # meta-robuness
 This is the code for roubust meta-learning project
 
-to train the model, run train.py
+To train the model, run train.py
 different args:
    --epoch: epoch number', default=1000
    --n_way: n way in meta model, default=10
