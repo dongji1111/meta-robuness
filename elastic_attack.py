@@ -21,8 +21,8 @@ class ElasticAttack(AttackWrapper):
             kernel_std (int):      Standard deviation of kernel
         '''
         super().__init__(resol)
-        self.device = 'cpu'
-        #self.device = 'cuda'
+        #self.device = 'cpu'
+        self.device = 'cuda'
         self.nb_its = nb_its
         self.eps_max = eps_max
         self.step_size = step_size
