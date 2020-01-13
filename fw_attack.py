@@ -23,8 +23,8 @@ class FrankWolfeAttack(AttackWrapper):
         self.rand_init = rand_init
         self.scale_each = scale_each
         self.nb_backward_steps = self.nb_its
-        #self.device =  'cuda'
-        self.device = 'cpu'
+        self.device =  'cuda'
+        #self.device = 'cpu'
 
     def _run_one(self, pixel_model, pixel_inp, delta, target, base_eps, avoid_target=True):
         s = pixel_model(pixel_inp + delta)
