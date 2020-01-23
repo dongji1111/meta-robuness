@@ -33,7 +33,7 @@ def main():
     torch.cuda.manual_seed_all(222)
     np.random.seed(222)
     attack_list = []
-    attack_name =['pgd_linf', 'pgd_l2', 'fw_l1', 'jpeg_linf', 'jpeg_l1', 'jpeg_l2 ','elastic', 'fog', 'gabor', 'snow']
+    attack_name =['pgd_linf', 'pgd_l2', 'fw_l1', 'jpeg_linf', 'jpeg_l1', 'jpeg_l2','elastic', 'fog', 'gabor', 'snow']
     attack_eps_cifar = [[1,2,4,8],[40,80,160,320],[195,390,780,1560],
                   [0.03125,0.0625,0.125,0.25],[2,8,64,256],[0.125,0.25,0.5,1]]
     for i in range(len(attack_eps_cifar)):
