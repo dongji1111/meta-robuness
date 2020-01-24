@@ -22,6 +22,8 @@ class Meta(nn.Module):
 
         self.update_lr = args.update_lr
         self.meta_lr = args.meta_lr
+        #self.update_lr = update_lr
+        #self.meta_lr = meta_lr
         self.n_way = args.n_way
         self.k_spt = args.k_spt
         self.k_qry = args.k_qry
@@ -29,6 +31,11 @@ class Meta(nn.Module):
         self.update_step = args.update_step
         self.update_step_test = args.update_step_test
         self.net = Learner(config)
+        self.meta_optim = optim.Adam(self.net.parameters(), lr=self.meta_lr)
+
+    def set_lr(self,update_lr,meta_lr):
+        self.update_lr = update_lr
+        self.meta_lr = meta_lr
         self.meta_optim = optim.Adam(self.net.parameters(), lr=self.meta_lr)
 
 
@@ -135,11 +142,10 @@ class Meta(nn.Module):
         # for p in self.net.parameters()[:5]:
         # 	print(torch.norm(p).item())
         self.meta_optim.step()
-
-
         accs = np.array(corrects) / (querysz * task_num)
         acc = accs[-1]
-        return accs,acc
+        loss = loss_q.detach().numpy()
+        return accs, acc, loss
 
     def finetunning(self, x_spt, y_spt, x_qry, y_qry):
         """
@@ -208,8 +214,11 @@ class Meta(nn.Module):
         del net
 
         accs = np.array(corrects) / querysz
+        acc = accs[-1]
+        loss = loss_q.detach().numpy()
 
-        return accs
+        return accs,acc,loss
+
 
 
 def main():
